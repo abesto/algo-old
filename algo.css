@@ -1,0 +1,33 @@
+body {
+    width: 70%;
+    margin: auto;
+    font-size: 1.1em;
+    font-family: Times New Roman, serif;
+    line-height: 130%;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    color: black;
+    font-family: Helvetica, sans-serif;
+    margin-bottom: 50px;
+    padding: 20px;
+    border: 5px outset black;
+    line-height: 130%;
+    text-shadow: #ccc 3px 3px 2px;
+}
+
+#why, #what {
+    margin: auto;
+    width: 90%;
+}
+
+#what {
+    margin-top: 20px;
+}
+
+#what li:before {
+    content: "program: ";
+}
+

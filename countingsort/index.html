@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Counting sort</title>
+    <link rel="stylesheet" type="text/css" href="countingSort.css"/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+
+    <script type="text/javascript" src="jquery-1.5.min.js"></script>
+    <script type="text/javascript" src="jquery.scrollTo-1.4.2-min.js"></script>
+    <script type="text/javascript" src="UID.js"></script>
+    <script type="text/javascript" src="Slots.js"></script>
+    <script type="text/javascript" src="StateUI.js"></script>
+    <script type="text/javascript" src="ConsoleUI.js"></script>
+    <script type="text/javascript" src="History.js"></script>
+    <script type="text/javascript" src="DetailsUI.js"></script>
+    <script type="text/javascript" src="HistoryUI.js"></script>
+    <script type="text/javascript" src="CountingSort.js"></script>
+    <script type="text/javascript" src="InputUI.js"></script>
+
+    <script type="text/javascript">
+        $(function()
+          {
+              var sort = new CountingSort(),
+                      ui = new StateUI($('.state'), sort),
+                  //logger = new ConsoleUI(sort),
+                      history = new History(sort),
+                  //historyLogger = new ConsoleUI(history),
+                      detailsUi = new DetailsUI($('.details'), sort, history),
+                      historyUi = new HistoryUI($('.history-container'), sort, history),
+                      inputUi = new InputUI($('.cs-input'), $('.cs-container'), sort);
+              sort.setHistory(history);
+              ui.setHistory(history);
+          });
+    </script>
+</head>
+<body>
+<div class="cs-container">
+    <h1>Leszámoló rendezés</h1>
+    <table>
+        <tr>
+            <th style="padding-top: 1%; border: 2px solid black; border-bottom: none; ">Lépések</th>
+            <th style="border-bottom: 1px solid black">Állapot</th>
+        </tr>
+        <tr>
+            <td class="history-container" rowspan="2" style=" border: 2px solid black; border-top: none;">
+                <input type="button" class="back" value="Vissza"/>
+                <input type="button" class="step" value="Következő"/>
+                <ol class="history"></ol>
+            </td>
+            <td class="state">
+                <fieldset>
+                    <legend>Rendezetlen</legend>
+                    <ol class="unsorted"></ol>
+                </fieldset>
+                <fieldset>
+                    <legend>Előfordulás-számok</legend>
+                    <table class="occurences">
+                        <tr></tr>
+                        <tr></tr>
+                    </table>
+                </fieldset>
+                <fieldset>
+                    <legend>Edényvégek</legend>
+                    <table class="bin-ends">
+                        <tr></tr>
+                        <tr></tr>
+                    </table>
+                </fieldset>
+                <fieldset>
+                    <legend>Rendezett</legend>
+                    <ol class="sorted"></ol>
+                </fieldset>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h4>Magyarázat</h4>
+                <div class="details"></div>
+            </td>
+        </tr>
+    </table>
+    <div class="copyright">Copyright 2011 Nagy Zoltán (<a href="/countingsort/LICENSE">Apache License Version 2.0)</a>
+        | Using <a href="http://jquery.org">JQuery</a> 1.5
+    </div>
+</div>
+<form class="cs-input">
+    <fieldset>
+        <legend>Input</legend>
+        Key: Value párok
+        <ul>
+        </ul>
+        <input type="button" class="start" value="Start" />
+    </fieldset>
+</form>
+</body>
+</html>
