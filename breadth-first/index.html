@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Szélességi bejárás</title>
+
+    <link rel="stylesheet" type="text/css" href="graph.css" />
+
+    <script src="../lib/raphael/raphael.js"></script>
+    <script src="../lib/raphael/plugins/raphael.connection.js"></script>
+    <script src="../lib/Slots.js"></script>
+    <script src="../lib/ConsoleUI.js"></script>
+    <script src="../lib/UID.js"></script>
+    <script src="Graph.js"></script>
+    <script src="BreadthFirst.js"></script>
+
+    <script type="text/javascript">
+        var     g = new Graph(), ns = [], es = [];
+
+        for (var i = 0; i < 5; i++) ns.push(g.newNode());
+        g.connect(ns[0], ns[1]);
+        g.connect(ns[0], ns[2]);
+        g.connect(ns[2], ns[3]);
+        g.connect(ns[3], ns[4]);
+        g.connect(ns[4], ns[0]);
+        
+        var b = new BreadthFirst(ns[0]);
+
+        new ConsoleUI(g);
+        new ConsoleUI(b);
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
