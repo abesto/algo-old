@@ -93,7 +93,7 @@ var GraphUI = (function()
             var bbox = elem.getBBox(), left = bbox.x + bbox.width + 5,
                 middle = bbox.y + (bbox.height/2), text, rect, st;
 
-            text = that._r.text(left, middle, text).attr({'font-size': 15, 'text-anchor': 'start'});
+            text = that._r.text(left, middle, text).attr({'font-size': 15, 'text-anchor': 'start', 'fill': '#ccf'});
             rect = that._r.rect(bbox.x - 5, bbox.y - 5, left + text.getBBox().width + 5, bbox.height + 10)
                     .attr({'fill': 'white', 'fill-opacity': 0}).toBack();
 

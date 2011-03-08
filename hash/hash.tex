@@ -1,0 +1,59 @@
+\documentclass{scrartcl}
+
+\makeatletter
+\usepackage{tabularx}
+\def\hlinewd#1{%
+\noalign{\ifnum0=`}\fi\hrule \@height #1 %
+\futurelet\reserved@a\@xhline} 
+\makeatother
+
+\usepackage[magyar]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{ucs}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{array}
+\author{Nagy Zoltán}
+\title{Három hasítófüggvény}
+\subtitle{EHA kódok ütközésmentes hasítása konstans időben}
+
+
+\begin{document}
+\maketitle
+\pagebreak
+
+\section{Feladatkitűzés}
+Mérési jegyzőkönyvet készíteni legalább 3 olyan hasító függvényről, amely a csoport EHA kódjait egy elég kicsi méretű olyan hasítótáblára képzi, amiben nincs ütközés.
+
+\section{Megoldás}
+Ismertetni fogok három hasítófüggvényt, ami (a bemenő adatok ismeretében) megfelel a feltételeknek. Az EHA kódok közös szuffixumaitól (\textsf{.ELTE}) eltekintek a megoldás során. A hasító\-függvények ismertetése után következik egy összefoglaló táblázat az inputokról és az egyes EHA kódok hasítófüggvény szerinti képeiről. A hasító\-függvényben használt minimális modulusokat és egyéb paramétereket egy "próbálgató" programmal találtam meg.
+
+\subsection{Első függvény}
+Kézenfekvő az azonosítókat alkotó karakterek ASCII kódjaival dolgozni. Vehetjük pél\-dá\-ul néhány karakter értékének számtani közepét. Az így kapott függvény érték\-készlete az összes (nagy) betű, de ezt még szűkíthetjük maradékképzéssel. Jelölje $S$ EHA kód $i$-edik karakterének ASCII kódját $S_i$. Legyen az első hasítófüggvény $f_1(S) = \lfloor\frac{S_1 + S_2}{2}\rfloor \;mod \:15$.
+
+\subsection{Második függvény}
+Az első függvény kis módosításával kapunk egy nagyobb táblába képző, de még mindig használható függvényt. Optimális index- és modulusválasztásokkal legyen a második hasítófüggvény $f_2(S) = S_1 * S_2 * S_3 \;mod \:23$.
+
+\subsection{Harmadik függvény}
+Itt sincs új ötlet, csak a már használt elemeket rendezgetjük. Legyen a harmadik hasítófüggvény $f_3(S) = max(S_1, S_2, S_3) + min(S_1, S_2, S_3) \;mod \:17$.
+
+\subsection{Függvény szerinti képek}
+\sffamily
+\begin{tabular}{c||c|c|c}
+$S$ & $f_1(S)$ & $f_2(S)$ & $f_3(S)$ \\ 
+\hlinewd{1pt}
+BAMPAAI & 5  & 4  & 12\\
+FAANABI & 7  & 16 & 16\\
+GEGRAAI & 10 & 0  & 4\\
+GUJQAAI & 3  & 22 & 3\\
+HAARAAT & 8  & 2  & 1\\
+NAZRAAI & 11 & 3  & 7\\
+RARRABI & 13 & 14 & 11\\
+SCMQAAI & 0  & 6  & 14\\
+TACQAAI & 14 & 5  & 13\\
+UJZRAAT & 4  & 1  & 6\\
+\end{tabular} 
+\normalfont
+
+\end{document}
