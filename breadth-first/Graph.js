@@ -33,6 +33,10 @@ Node = (function() {
         return ns;
     };
 
+    Constructor.prototype.deleted = function() {
+        this._emit('deleted');
+    }
+
     Constructor.prototype.toString = function() {
         var neighbors = this.neighbors(), neighborNames = [], str = 'node-' + this.UID, i;
         for (i = 0; i < neighbors.length; i++) {
@@ -68,6 +72,10 @@ Edge = (function() {
         return 'edge-' + this.UID + ' (node-' + this.node1().UID + ', node-' + this.node2().UID + ')';
     };
 
+    Constructor.prototype.deleted = function() {
+        SAS.emit('deleted', this.UID);
+    }
+
     return Constructor;
 })();
 
@@ -100,15 +108,18 @@ Graph = (function() {
     };
 
     Constructor.prototype.deleteNode = function(n) {
-        n.edges().each(this.deleteEdge);
-        nodes().remove(n);
+        var that = this;
+        n.edges().each(function(n) {that.deleteEdge(n);});
+        n.deleted();
+        this.nodes().remove(n);
         this._emit('node_deleted', {node: n});
     };
 
     Constructor.prototype.deleteEdge = function(e) {
-        e.node1().deleteEdge(e);
-        e.node2().deleteEdge(e);
-        edges().remove(e);
+        e.node1().removeEdge(e);
+        e.node2().removeEdge(e);
+        this.edges().remove(e);
+        e.deleted();
         this._emit('edge_deleted', {edge: e});
     };
 

@@ -16,15 +16,27 @@
     <script src="../lib/UID.js"></script>
     <script src="Graph.js"></script>
     <script src="GraphUI.js"></script>
+    <script src="tools/CreateNode.js"></script>
+    <script src="tools/MoveNode.js"></script>
+    <script src="tools/CreateEdge.js"></script>
     <script src="BreadthFirst.js"></script>
+    <script src="tools/BreadthFirst.js"></script>
+    <script src="tools/DeleteNode.js"></script>
+    <script src="tools/DeleteEdge.js"></script>
 
     <script type="text/javascript">
         var     g = new Graph();
 
-        new ConsoleUI(g);
+        //new ConsoleUI(g);
 
         window.onload = function() {
-            new GraphUI('holder', 800, 600, g);
+            var ui = new GraphUI('holder', 800, 600, g);
+            ui.addTool(CreateNodeTool);
+            ui.addTool(MoveNodeTool);
+            ui.addTool(DeleteNodeTool);
+            ui.addTool(CreateEdgeTool);
+            ui.addTool(DeleteEdgeTool);
+            ui.addTool(BreadthFirstTool);
         }
 
     </script>
