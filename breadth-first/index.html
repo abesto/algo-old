@@ -30,7 +30,10 @@
         //new ConsoleUI(g);
 
         window.onload = function() {
-            var ui = new GraphUI('holder', 800, 600, g);
+            var holder = $('#holder'), width = holder.width(),
+                    height =$(window).height() - holder.offset().top - 30;
+
+            var ui = new GraphUI('holder', width, height, g);
             ui.addTool(CreateNodeTool);
             ui.addTool(MoveNodeTool);
             ui.addTool(DeleteNodeTool);

@@ -33,7 +33,9 @@ var CreateNodeTool = {
                                   function(signal) {
                                       node.text.attr({text: signal.param('label')});
                                   }, node.node.model.UID);
+
                 SAS.addStrictSlot('deleted', function(signal) {
+                                      node.text.remove();
                                       node.remove();
                                   }, node.node.model.UID);
             }
