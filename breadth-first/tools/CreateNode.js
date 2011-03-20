@@ -38,6 +38,8 @@ var CreateNodeTool = {
                                       node.text.remove();
                                       node.remove();
                                   }, node.node.model.UID);
+
+                return node.node.model.UID;
             }
         }
     }

@@ -6,6 +6,7 @@ var GraphUI = (function()
     {
         $('#' + elem).css({'width': width, 'height': height});
         this._r = Raphael(elem, width, height);
+        this._holder = $('#' + elem);
         this._graph = graph;
         this._tool = '';
         this._tools = [];
@@ -77,13 +78,17 @@ var GraphUI = (function()
 
         st.click(function(event)
                  {
+                     event.stopPropagation();
+                     if (typeof tool.hooks['clicked'] === 'function') {
+                         if (tool.hooks['clicked'].call(that) === true) return;
+                     }
+
                      var i;
                      for (i = 0; i < that._tools.length; i++) {
                          that._tools[i].attr({'fill-opacity': 0});
                      }
                      rect.attr({'fill-opacity': .3});
                      that._tool = tool.name;
-                     event.stopPropagation();
                  });
 
         for (hookTool in tool.hooks) {

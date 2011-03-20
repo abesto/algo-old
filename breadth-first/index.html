@@ -8,21 +8,30 @@
     <link rel="stylesheet" type="text/css" href="graph.css" />
 
     <script src="../lib/jquery-1.5.min.js"></script>
+    <script src="../lib/jquery.json-2.2.min.js"></script>
 
     <script src="../lib/raphael/raphael.js"></script>
     <script src="../lib/raphael/plugins/raphael.connection.js"></script>
+
+    <script src="../lib/Lang.js"></script>
     <script src="../lib/Slots.js"></script>
     <script src="../lib/ConsoleUI.js"></script>
     <script src="../lib/UID.js"></script>
+
     <script src="Graph.js"></script>
     <script src="GraphUI.js"></script>
     <script src="tools/CreateNode.js"></script>
     <script src="tools/MoveNode.js"></script>
     <script src="tools/CreateEdge.js"></script>
-    <script src="BreadthFirst.js"></script>
-    <script src="tools/BreadthFirst.js"></script>
     <script src="tools/DeleteNode.js"></script>
     <script src="tools/DeleteEdge.js"></script>
+
+    <script src="BreadthFirst.js"></script>
+    <script src="tools/BreadthFirst.js"></script>
+
+    <script src="GraphSerializer.js"></script>
+    <script src="tools/Save.js"></script>
+    <script src="tools/Load.js"></script>
 
     <script type="text/javascript">
         var     g = new Graph();
@@ -40,12 +49,14 @@
             ui.addTool(CreateEdgeTool);
             ui.addTool(DeleteEdgeTool);
             ui.addTool(BreadthFirstTool);
+            ui.addTool(SaveTool);
+            ui.addTool(LoadTool);
         }
 
     </script>
 </head>
 <body>
 <h2>Szélességi bejárás</h2>
-<div id="holder"><div class="graph"></div></div>
+<div id="holder"></div>
 </body>
 </html>
