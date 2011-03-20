@@ -9,7 +9,9 @@ var CreateEdgeTool = {
             },
             nodeMouseup: function(event) {
                 var edgeUi, that = this;
-                if (this._connectFrom != event.currentTarget) {
+                if (this._connectFrom != event.currentTarget
+                        && this._connectFrom.node.model.neighbors().indexOf(event.currentTarget.model) == -1)
+                {
                     edgeUi = this.connect(this._connectFrom, event.currentTarget);
 
                     edgeUi.line.click(function(e) { that.edgeClick(e); });
