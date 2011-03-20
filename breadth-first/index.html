@@ -5,7 +5,7 @@
     <title>Szélességi bejárás</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
 
-    <link rel="stylesheet" type="text/css" href="graph.css" />
+    <link rel="stylesheet" type="text/css" href="../lib/graph/graph.css" />
 
     <script src="../lib/jquery-1.5.min.js"></script>
     <script src="../lib/jquery.json-2.2.min.js"></script>
@@ -18,20 +18,20 @@
     <script src="../lib/ConsoleUI.js"></script>
     <script src="../lib/UID.js"></script>
 
-    <script src="Graph.js"></script>
-    <script src="GraphUI.js"></script>
-    <script src="tools/CreateNode.js"></script>
-    <script src="tools/MoveNode.js"></script>
-    <script src="tools/CreateEdge.js"></script>
-    <script src="tools/DeleteNode.js"></script>
-    <script src="tools/DeleteEdge.js"></script>
+    <script src="../lib/graph/Graph.js"></script>
+    <script src="../lib/graph/GraphUI.js"></script>
+    <script src="../lib/graph/tools/CreateNode.js"></script>
+    <script src="../lib/graph/tools/MoveNode.js"></script>
+    <script src="../lib/graph/tools/CreateEdge.js"></script>
+    <script src="../lib/graph/tools/DeleteNode.js"></script>
+    <script src="../lib/graph/tools/DeleteEdge.js"></script>
 
     <script src="BreadthFirst.js"></script>
     <script src="tools/BreadthFirst.js"></script>
 
-    <script src="GraphSerializer.js"></script>
-    <script src="tools/Save.js"></script>
-    <script src="tools/Load.js"></script>
+    <script src="../lib/graph/GraphSerializer.js"></script>
+    <script src="../lib/graph/tools/Save.js"></script>
+    <script src="../lib/graph/tools/Load.js"></script>
 
     <script type="text/javascript">
         var     g = new Graph();
@@ -57,6 +57,12 @@
 </head>
 <body>
 <h2>Szélességi bejárás</h2>
-<div id="holder"></div>
+<div id="holder">
+
+</div>
+    <div class="copyright">Copyright 2011 Nagy Zoltán (<a href="/LICENSE">Apache License Version 2.0)</a>
+        | <a href="http://jquery.org">JQuery</a> 1.5
+        | <a href="http://raphaeljs.com/">Raphaël.js</a>
+    </div>
 </body>
 </html>
