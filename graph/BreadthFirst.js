@@ -37,16 +37,14 @@ var BreadthFirst = function(node)
         if (typeof node == 'undefined') {
             emit('done');
         } else {
-            var neighbors = node.neighbors();
-
             if (node.getLabel() !== '') return;
             node.setLabel(stepCount++);
 
-            for (i = 0; i < neighbors.length; i++) {
-                if (neighbors[i].getLabel() === '') {
-                    queue.push(neighbors[i]);
+            node.neighbors().each(function(n) {
+                if (n.getLabel() === '') {
+                    queue.push(n);
                 }
-            }
+            });
         }
 
         return queue;

@@ -21,19 +21,29 @@
  */
 
 var BreadthFirstTool = {
+    timer: null,
+
     name: 'breadthFirst',
     label: 'Szélességi bejárás',
     hooks: {
         breadthFirst: {
             nodeClick: function(event) {
                     var b = new BreadthFirst(event.currentTarget.model);
+
+                    if (BreadthFirstTool.timer != null) {
+                        clearTimeout(BreadthFirstTool.timer);
+                        BreadthFirstTool.timer = null;
+                    }
+
                     this._graph.nodes().each(function(n) { n.setLabel(''); });
                     (function() {
                         if (b.step().length > 0) {
-                            setTimeout(arguments.callee, 500);
+                            BreadthFirstTool.timer = setTimeout(arguments.callee, 800);
+                        } else {
+                            BreadthFirstTool.timer = null;
                         }
                     })();
             }
         }
     }
-}
+};

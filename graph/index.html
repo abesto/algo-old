@@ -29,12 +29,15 @@
     <script src="BreadthFirst.js"></script>
     <script src="tools/BreadthFirst.js"></script>
 
+    <script src="Dijkstra.js"></script>
+    <script src="tools/Dijkstra.js"></script>
+
     <script src="../lib/graph/GraphSerializer.js"></script>
     <script src="../lib/graph/tools/Save.js"></script>
     <script src="../lib/graph/tools/Load.js"></script>
 
     <script type="text/javascript">
-        var     g = new Graph();
+        var     g = new Graph(), ui;
 
         //new ConsoleUI(g);
 
@@ -42,13 +45,14 @@
             var holder = $('#holder'), width = holder.width(),
                     height =$(window).height() - holder.offset().top - 30;
 
-            var ui = new GraphUI('holder', width, height, g);
+            ui = new GraphUI('holder', width, height, g);
             ui.addTool(CreateNodeTool);
             ui.addTool(MoveNodeTool);
             ui.addTool(DeleteNodeTool);
             ui.addTool(CreateEdgeTool);
             ui.addTool(DeleteEdgeTool);
             ui.addTool(BreadthFirstTool);
+            ui.addTool(DijkstraTool);
             ui.addTool(SaveTool);
             ui.addTool(LoadTool);
         }
@@ -56,13 +60,13 @@
     </script>
 </head>
 <body>
-<h2>Szélességi bejárás</h2>
+<h2>Gráfalgoritmusok</h2>
 <div id="holder">
 
 </div>
     <div class="copyright">Copyright 2011 Nagy Zoltán (<a href="/LICENSE">Apache License Version 2.0)</a>
-        | <a href="http://jquery.org">JQuery</a> 1.5
-        | <a href="http://raphaeljs.com/">Raphaël.js</a>
+        | <a href="http://jquery.org">JQuery</a> 1.5 
+        | <a href="http://raphaeljs.com/">Raphaël.js</a> (<a href="http://raphaeljs.com/license.html">MIT License</a>)
     </div>
 </body>
 </html>
