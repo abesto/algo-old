@@ -6,82 +6,115 @@
     <link rel="stylesheet" type="text/css" href="countingSort.css"/>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
 
-    <script type="text/javascript" src="../lib/jquery-1.5.min.js"></script>
-    <script type="text/javascript" src="jquery.scrollTo-1.4.2-min.js"></script>
-    <script type="text/javascript" src="../lib/UID.js"></script>
-    <script type="text/javascript" src="../lib/Slots.js"></script>
-    <script type="text/javascript" src="StateUI.js"></script>
-    <script type="text/javascript" src="../lib/ConsoleUI.js"></script>
-    <script type="text/javascript" src="History.js"></script>
-    <script type="text/javascript" src="DetailsUI.js"></script>
-    <script type="text/javascript" src="HistoryUI.js"></script>
-    <script type="text/javascript" src="CountingSort.js"></script>
-    <script type="text/javascript" src="InputUI.js"></script>
+    <script type="text/javascript" src="../js/3rd-party/Namespace.js"></script>
+    <script type="text/javascript" src="../js/net/abesto/common.js"></script>
 
     <script type="text/javascript">
+        Namespace.from('3rd-party').includeMultiple('jquery', 'jquery.scrollTo');
+
         $(function()
           {
-              var sort = new CountingSort(),
-                      ui = new StateUI($('.state'), sort),
-                  //logger = new ConsoleUI(sort),
-                      history = new History(sort),
-                  //historyLogger = new ConsoleUI(history),
-                      detailsUi = new DetailsUI($('.details'), sort, history),
-                      historyUi = new HistoryUI($('.history-container'), sort, history),
-                      inputUi = new InputUI($('.cs-input'), $('.cs-container'), sort);
+              Namespace.from('net.abesto').includeMultiple('Slots', 'UID', 'Translation', 'ConsoleUI');
+              Namespace.use('net.abesto.*');
+
+              Namespace.from('net.abesto.counting-sort').includeMultiple(
+                      'CountingSort', 'DetailsUI', 'History', 'HistoryUI', 'InputUI', 'StateUI'
+                      );
+              Namespace.use('net.abesto.counting-sort.*');
+
+              // Translations
+              var     translation = new Translation(),
+                      provider = JsonRemote('hu', null, function(data) { translation.update(data); }),
+
+              // Model
+                      sort = new CountingSort(),
+                      sortHistory = new History(sort),
+
+              // UI - state
+                      ui = new StateUI({
+                                           elem: $('.state'),
+                                           model: sort
+                                       }),
+
+              // UI - details
+                      detailsUi = new DetailsUI({
+                                                    elem: $('.details'),
+                                                    sort: sort,
+                                                    history: sortHistory,
+                                                    translation: translation
+                                                }),
+
+              // UI - history
+                      historyUi = new HistoryUI({
+                                                    elem: $('.history-container'),
+                                                    sort: sort,
+                                                    history: sortHistory,
+                                                    translation: translation
+                                                }),
+                      inputUi = new InputUI($('.cs-input'), $('.cs-container'), sort),
+
+              // UI - titles
+                      titles = ['unsorted', 'sorted', 'occurences', 'bin-ends', 'steps', 'state', 'details', 'step', 'back'];
+
+              for (var i in titles) {
+                  translation.bind($('.cs-container .'+titles[i]+'-title'), 'titles.'+titles[i]);
+              }
+
               sort.setHistory(history);
               ui.setHistory(history);
+              
           });
     </script>
 </head>
 <body>
 <div class="cs-container">
-    <h1>Leszámoló rendezés</h1>
+    <h1 class="counting-sort-title"></h1>
     <table>
         <tr>
-            <th style="padding-top: 1%; border: 2px solid black; border-bottom: none; ">Lépések</th>
-            <th style="border-bottom: 1px solid black">Állapot</th>
+            <th class="steps-title" style="padding-top: 1%; border: 2px solid black; border-bottom: none; "></th>
+            <th class="state-title" style="border-bottom: 1px solid black"></th>
         </tr>
         <tr>
             <td class="history-container" rowspan="2" style=" border: 2px solid black; border-top: none;">
-                <input type="button" class="back" value="Vissza"/>
-                <input type="button" class="step" value="Következő"/>
+                <input type="button" class="back-title" value="Vissza"/>
+                <input type="button" class="step-title" value="Következő"/>
                 <ol class="history"></ol>
             </td>
             <td class="state">
                 <fieldset>
-                    <legend>Rendezetlen</legend>
+                    <legend class="unsorted-title"></legend>
                     <ol class="unsorted"></ol>
                 </fieldset>
                 <fieldset>
-                    <legend>Előfordulás-számok</legend>
+                    <legend class="occurences-title"></legend>
                     <table class="occurences">
                         <tr></tr>
                         <tr></tr>
                     </table>
                 </fieldset>
                 <fieldset>
-                    <legend>Edényvégek</legend>
+                    <legend class="bin-ends-title"></legend>
                     <table class="bin-ends">
                         <tr></tr>
                         <tr></tr>
                     </table>
                 </fieldset>
                 <fieldset>
-                    <legend>Rendezett</legend>
+                    <legend class="sorted-title"></legend>
                     <ol class="sorted"></ol>
                 </fieldset>
             </td>
         </tr>
         <tr>
             <td>
-                <h4>Magyarázat</h4>
+                <h4 class="details-title"></h4>
                 <div class="details"></div>
             </td>
         </tr>
     </table>
     <div class="copyright">Copyright 2011 Nagy Zoltán (<a href="/LICENSE">Apache License Version 2.0)</a>
         | Using <a href="http://jquery.org">JQuery</a> 1.5
+        | <a href="https://github.com/smith/namespacedotjs">Namespace.js</a> (MIT License)
     </div>
 </div>
 <form class="cs-input">

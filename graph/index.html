@@ -5,44 +5,31 @@
     <title>Szélességi bejárás</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
 
-    <link rel="stylesheet" type="text/css" href="../lib/graph/graph.css" />
+    <link rel="stylesheet" type="text/css" href="graph.css" />
 
-    <script src="../lib/jquery-1.5.min.js"></script>
-    <script src="../lib/jquery.json-2.2.min.js"></script>
-
-    <script src="../lib/raphael/raphael.js"></script>
-    <script src="../lib/raphael/plugins/raphael.connection.js"></script>
-
-    <script src="../lib/Lang.js"></script>
-    <script src="../lib/Slots.js"></script>
-    <script src="../lib/ConsoleUI.js"></script>
-    <script src="../lib/UID.js"></script>
-
-    <script src="../lib/graph/Graph.js"></script>
-    <script src="../lib/graph/GraphUI.js"></script>
-    <script src="../lib/graph/tools/CreateNode.js"></script>
-    <script src="../lib/graph/tools/MoveNode.js"></script>
-    <script src="../lib/graph/tools/CreateEdge.js"></script>
-    <script src="../lib/graph/tools/DeleteNode.js"></script>
-    <script src="../lib/graph/tools/DeleteEdge.js"></script>
-
-    <script src="BreadthFirst.js"></script>
-    <script src="tools/BreadthFirst.js"></script>
-
-    <script src="Dijkstra.js"></script>
-    <script src="tools/Dijkstra.js"></script>
-
-    <script src="../lib/graph/GraphSerializer.js"></script>
-    <script src="../lib/graph/tools/Save.js"></script>
-    <script src="../lib/graph/tools/Load.js"></script>
+    <script type="text/javascript" src="../js/3rd-party/Namespace.js"></script>
+    <script type="text/javascript" src="../js/net/abesto/common.js"></script>
 
     <script type="text/javascript">
+        Namespace.from('3rd-party').includeMultiple('jquery', 'jquery.json');
+        Namespace.from('net.abesto').includeMultiple('common', 'UID', 'Slots');
+        Namespace.from('net.abesto.graph').includeMultiple('Graph', 'GraphUI');
+        Namespace.from('net.abesto.graph.tools').includeMultiple(
+                'CreateNode', 'MoveNode', 'DeleteNode',
+                'CreateEdge', 'DeleteEdge',
+                'BreadthFirst', 'Dijkstra',
+                'Save', 'Load'
+                );
+
+        Namespace.use('net.abesto.graph.*');
+        Namespace.use('net.abesto.graph.tools.*');
+
         var     g = new Graph(), ui;
 
         //new ConsoleUI(g);
 
         window.onload = function() {
-            var holder = $('#holder'), width = holder.width(),
+            var     holder = $('#holder'), width = holder.width(),
                     height =$(window).height() - holder.offset().top - 30;
 
             ui = new GraphUI('holder', width, height, g);
@@ -65,7 +52,7 @@
 
 </div>
     <div class="copyright">Copyright 2011 Nagy Zoltán (<a href="/LICENSE">Apache License Version 2.0)</a>
-        | <a href="http://jquery.org">JQuery</a> 1.5 
+        | <a href="http://jquery.org">JQuery</a> 1.5 | <a href="https://github.com/smith/namespacedotjs">Namespace.js</a> (MIT License)
         | <a href="http://raphaeljs.com/">Raphaël.js</a> (<a href="http://raphaeljs.com/license.html">MIT License</a>)
     </div>
 </body>
