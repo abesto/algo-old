@@ -20,7 +20,7 @@
  * limitations under the License.
  */
 
-Namespace.include('3rd-party.raphael.raphael-min');
+net.abesto.includeQueue.enqueue('3rd-party.raphael', ['raphael-min']);
 
 Namespace('net.abesto.graph', {
 
@@ -79,6 +79,23 @@ GraphUI: (function()
             run.call(this, this._hooks[name].any);
             run.call(this, this._hooks[name][this._tool]);
         }
+    };
+
+    Constructor.prototype.resetEdges = function()
+    {
+        this._graph.edges().each(function(e) {
+            e.ui.line.attr('stroke', GraphUI.settings.edgeFill);
+            e.ui.bg.attr('stroke', GraphUI.settings.edgeColor);
+        });
+    };
+
+
+    Constructor.prototype.resetNodes = function()
+    {
+        this._graph.nodes().each(function(n) {
+            n.ui.attr('stroke', GraphUI.settings.nodeColor);
+            n.setLabel('');
+        });
     };
 
     Constructor.prototype.addTool = function(tool)

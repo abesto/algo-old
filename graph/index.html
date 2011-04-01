@@ -11,38 +11,41 @@
     <script type="text/javascript" src="../js/net/abesto/common.js"></script>
 
     <script type="text/javascript">
-        Namespace.from('3rd-party').includeMultiple('jquery', 'jquery.json');
-        Namespace.from('net.abesto').includeMultiple('common', 'UID', 'Slots');
-        Namespace.from('net.abesto.graph').includeMultiple('Graph', 'GraphUI');
-        Namespace.from('net.abesto.graph.tools').includeMultiple(
+        Namespace.include('3rd-party.jquery');
+        var g, ui;
+        $(function() {
+            net.abesto.includeQueue.enqueue('3rd-party', ['jquery.json']);
+            net.abesto.includeQueue.enqueue('net.abesto', ['UID', 'Slots']);
+            net.abesto.includeQueue.enqueue('net.abesto.graph', ['Graph', 'GraphUI']);
+            net.abesto.includeQueue.enqueue('net.abesto.graph.tools',
+            [
                 'CreateNode', 'MoveNode', 'DeleteNode',
                 'CreateEdge', 'DeleteEdge',
-                'BreadthFirst', 'Dijkstra',
+                'BreadthFirst', 'Dijkstra', 'Prim',
                 'Save', 'Load'
-                );
+            ]);
+            net.abesto.includeQueue.callback = function(){
+                Namespace.use('net.abesto.graph.*');
+                Namespace.use('net.abesto.graph.tools.*');
 
-        Namespace.use('net.abesto.graph.*');
-        Namespace.use('net.abesto.graph.tools.*');
+                g = new Graph();
 
-        var     g = new Graph(), ui;
+                var     holder = $('#holder'), width = holder.width(),
+                        height =$(window).height() - holder.offset().top - 30;
 
-        //new ConsoleUI(g);
-
-        window.onload = function() {
-            var     holder = $('#holder'), width = holder.width(),
-                    height =$(window).height() - holder.offset().top - 30;
-
-            ui = new GraphUI('holder', width, height, g);
-            ui.addTool(CreateNodeTool);
-            ui.addTool(MoveNodeTool);
-            ui.addTool(DeleteNodeTool);
-            ui.addTool(CreateEdgeTool);
-            ui.addTool(DeleteEdgeTool);
-            ui.addTool(BreadthFirstTool);
-            ui.addTool(DijkstraTool);
-            ui.addTool(SaveTool);
-            ui.addTool(LoadTool);
-        }
+                ui = new GraphUI('holder', width, height, g);
+                ui.addTool(CreateNodeTool);
+                ui.addTool(MoveNodeTool);
+                ui.addTool(DeleteNodeTool);
+                ui.addTool(CreateEdgeTool);
+                ui.addTool(DeleteEdgeTool);
+                ui.addTool(BreadthFirstTool);
+                ui.addTool(DijkstraTool);
+                ui.addTool(PrimTool);
+                ui.addTool(SaveTool);
+                ui.addTool(LoadTool);
+            };
+        });
 
     </script>
 </head>

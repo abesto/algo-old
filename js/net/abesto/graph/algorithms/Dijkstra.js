@@ -20,15 +20,18 @@
  * limitations under the License.
  */
 
+net.abesto.includeQueue.enqueue('net.abesto.graph.algorithms', ['ConnectedSubgraph']);
+
 Namespace('net.abesto.graph.algorithms', {
 
-Dijkstra: function(graph, node)
+Dijkstra: function(node)
 {
-    var q = [], i = 0, emit = net.abesto.SAS.emitFunction(this);
+    var q = [], i = 0, emit = net.abesto.SAS.emitFunction(this),
+        nodes = net.abesto.graph.algorithms.ConnectedSubgraph.find(node);
 
     this.UID = UID();
 
-    graph.nodes().each(function(n) {
+    nodes.each(function(n) {
         n.setLabel(infinity);
         q.push(n);
     });

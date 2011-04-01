@@ -20,48 +20,37 @@
  * limitations under the License.
  */
 
-Namespace.use('net.abesto.graph.algorithms.Dijkstra');
+Namespace.use('net.abesto.graph.algorithms.Prim');
 
 Namespace('net.abesto.graph.tools', {
 
-DijkstraTool: {
+PrimTool: {
     timer: null,
 
-    name: 'dijkstra',
-    label: 'Dijkstra algoritmusa',
+    name: 'prim',
+    label: 'Prim algoritmusa',
     hooks: {
-        dijkstra: {
+        prim: {
             nodeClick: function(event) {
-                    var d = new Dijkstra(event.currentTarget.model);
-                    if (DijkstraTool.timer != null) {
-                        clearTimeout(DijkstraTool.timer);
-                        DijkstraTool.timer = null;
-                    }
+                    var p = new Prim(event.currentTarget.model);
 
                     this.resetEdges();
 
                     net.abesto.SAS.addStrictSlot('highlight_edge', function(signal) {
                         var n1 = signal.param('n1'), n2 = signal.param('n2');
-                        n2.edges().each(function(e) {
-                            var color, fill;
-                            if (e.otherNode(n2) == n1) {
-                                color = '#0f0';
-                                fill = '#040';
-                            } else {
-                                color = GraphUI.settings.edgeColor;
-                                fill = GraphUI.settings.edgeFill;
-                            }
-                            e.ui.line.attr('stroke', fill);
-                            e.ui.bg.attr('stroke', color);
-                        });
-                    }, d.UID);
+
+                        signal.param('edge').ui.line.attr('stroke', '#040');
+                        signal.param('edge').ui.bg.attr('stroke', '#0f0');
+                    }, p.UID);
+
+                    var timer;
 
                     (function() {
                         setTimeout(function() {
-                        if (d.step().length > 0) {
-                            DijkstraTool.timer = setTimeout(arguments.callee, 1300);
+                        if (p.step() > 0) {
+                            timer = setTimeout(arguments.callee, 1300);
                         } else {
-                            DijkstraTool.timer = null;
+                            timer = null;
                         }
                     }, 1500);})();
             }

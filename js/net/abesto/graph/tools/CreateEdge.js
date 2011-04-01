@@ -20,7 +20,7 @@
  * limitations under the License.
  */
 
-Namespace.include('3rd-party.raphael.plugins.connection');
+net.abesto.includeQueue.includeAfter('3rd-party.raphael.plugins.connection', '3rd-party.raphael.raphael-min');
 
 Namespace('net.abesto.graph.tools', {
 

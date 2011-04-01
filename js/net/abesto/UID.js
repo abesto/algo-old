@@ -72,5 +72,14 @@ UIDObjectStore = (function() {
         }
     };
 
+    Constructor.prototype.length = function() { return this._uids.length; };
+
+    Constructor.union = function(a, b) {
+        var c = new UIDObjectStore();
+        a.each(function(x) { c.add(x); });
+        b.each(function(x) { c.add(x); });
+        return c;
+    };
+
     return Constructor;
 })();
