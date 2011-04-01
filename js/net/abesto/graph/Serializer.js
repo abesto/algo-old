@@ -48,6 +48,7 @@ Serializer: (function() {
         var nodes = [], edges = [];
         SID = new UID.Generator();
 
+        console.log(graph);
         graph.nodes().each(function(n) { nodes.push(node(n)); });
         graph.edges().each(function(e) { edges.push(edge(e)); });
 

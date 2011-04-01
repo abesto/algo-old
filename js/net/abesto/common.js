@@ -67,6 +67,11 @@ Namespace('net.abesto', {
         after: {},
 
         includeAfter: function(what, after) {
+            if (Namespace.exist(after)) {
+                net.abesto.includeQueue.enqueue(undefined, [net.abesto.includeQueue.after[name][i]]);
+                return;
+            }
+
             if (!net.abesto.includeQueue.after[after])
                 net.abesto.includeQueue.after[after] = [];
             net.abesto.includeQueue.after[after].push(what);

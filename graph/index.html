@@ -12,11 +12,11 @@
 
     <script type="text/javascript">
         Namespace.include('3rd-party.jquery');
-        var g, ui;
+        var g, ui, s;
         $(function() {
             net.abesto.includeQueue.enqueue('3rd-party', ['jquery.json']);
             net.abesto.includeQueue.enqueue('net.abesto', ['UID', 'Slots']);
-            net.abesto.includeQueue.enqueue('net.abesto.graph', ['Graph', 'GraphUI']);
+            net.abesto.includeQueue.enqueue('net.abesto.graph', ['Graph', 'GraphUI', 'StatusUI']);
             net.abesto.includeQueue.enqueue('net.abesto.graph.tools',
             [
                 'CreateNode', 'MoveNode', 'DeleteNode',
@@ -30,8 +30,12 @@
 
                 g = new Graph();
 
+
                 var     holder = $('#holder'), width = holder.width(),
                         height =$(window).height() - holder.offset().top - 30;
+                
+                s = new StatusUI(holder);
+                PrimTool.statusUI = s;
 
                 ui = new GraphUI('holder', width, height, g);
                 ui.addTool(CreateNodeTool);

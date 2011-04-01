@@ -37,6 +37,10 @@ MoveNodeTool: {
                         that = this;
                 node.attr(attr);
                 node.text.attr({x: attr.cx, y: attr.cy});
+                node.uid.attr({x: attr.cx, y: attr.cy - net.abesto.graph.GraphUI.settings.nodeRadius});
+                var box = node.uid.getBBox();
+                node.uidBox.attr({x: box.x - 3, y: box.y - 3});
+                
                 node.node.model.edges().each(function(e) {
                                                  that._r.connection(e.ui);
                                              });

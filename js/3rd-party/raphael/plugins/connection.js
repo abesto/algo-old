@@ -49,8 +49,8 @@ Raphael.fn.connection = function (obj1, obj2, line, bg) {
     } else {
         var color = typeof line == "string" ? line : "#000";
         return {
-            bg: bg && bg.split && this.path(path).attr({stroke: bg.split("|")[0], fill: "none", "stroke-width": bg.split("|")[1] || 3}),
-            line: this.path(path).attr({stroke: color, fill: "none"}),
+            bg: bg && bg.split && this.path(path).attr({stroke: bg.split("|")[0], fill: "none", "stroke-width": bg.split("|")[1] || 3}).toBack(),
+            line: this.path(path).attr({stroke: color, fill: "none"}).toBack(),
             from: obj1,
             to: obj2
         };

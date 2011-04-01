@@ -6,7 +6,8 @@ Prim: (function() {
     var Constructor = function(node)
     {
         var v = net.abesto.graph.algorithms.ConnectedSubgraph.find(node),
-            vn = new UIDObjectStore(), en = new UIDObjectStore(), e = new UIDObjectStore();
+            vn = new UIDObjectStore(), en = new UIDObjectStore(), e = new UIDObjectStore(),
+            emit = net.abesto.SAS.emitFunction(this);
 
         v.each(function(n){
             n.setLabel('V');
@@ -30,10 +31,10 @@ Prim: (function() {
             });
 
             var n1 = minimal.node1(), n2 = minimal.node2(),
-                hasn1 = vn.has(n1), hasn2 = vn.has(n2);
+                hasn1 = vn.has(n1);
 
             en.add(minimal);
-            net.abesto.SAS.emit('highlight_edge', this.UID, {edge: minimal});
+            emit('highlight_edge', {edge: minimal});
 
             var newNode = hasn1 ? n2 : n1;
             newNode.setLabel('P');

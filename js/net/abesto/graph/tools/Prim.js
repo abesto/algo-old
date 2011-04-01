@@ -26,6 +26,7 @@ Namespace('net.abesto.graph.tools', {
 
 PrimTool: {
     timer: null,
+    statusUI: null,
 
     name: 'prim',
     label: 'Prim algoritmusa',
@@ -33,6 +34,7 @@ PrimTool: {
         prim: {
             nodeClick: function(event) {
                     var p = new Prim(event.currentTarget.model);
+                    net.abesto.graph.tools.PrimTool.statusUI.listenTo(p);
 
                     this.resetEdges();
 
