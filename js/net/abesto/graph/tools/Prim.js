@@ -33,22 +33,24 @@ PrimTool: {
     hooks: {
         prim: {
             nodeClick: function(event) {
-                    var p = new Prim(event.currentTarget.model);
-                    net.abesto.graph.tools.PrimTool.statusUI.listenTo(p);
+                var p = new Prim(event.currentTarget.model);
+                net.abesto.graph.tools.PrimTool.statusUI.listenTo(p);
 
-                    this.resetEdges();
+                this.resetEdges();
 
-                    net.abesto.SAS.addStrictSlot('highlight_edge', function(signal) {
-                        var n1 = signal.param('n1'), n2 = signal.param('n2');
+                net.abesto.SAS.addStrictSlot('highlight_edge', function(signal) {
+                    var n1 = signal.param('n1'), n2 = signal.param('n2');
 
-                        signal.param('edge').ui.line.attr('stroke', '#040');
-                        signal.param('edge').ui.bg.attr('stroke', '#0f0');
-                    }, p.UID);
+                    signal.param('edge').ui.line.attr('stroke', '#040');
+                    signal.param('edge').ui.bg.attr('stroke', '#0f0');
+                }, p.UID);
 
-                    var timer;
+                var timer;
 
-                    (function() {
-                        setTimeout(function() {
+                p.init();
+
+                (function() {
+                    setTimeout(function() {
                         if (p.step() > 0) {
                             timer = setTimeout(arguments.callee, 1300);
                         } else {

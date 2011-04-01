@@ -31,12 +31,13 @@ Dijkstra: function(node)
 
     this.UID = UID();
 
-    nodes.each(function(n) {
-        n.setLabel(infinity);
-        q.push(n);
-    });
-
-    node.setLabel(0);
+    this.init = function() {
+        nodes.each(function(n) {
+            n.setLabel(infinity);
+            q.push(n);
+        });
+        node.setLabel(0);
+    };
 
     this.step = function() {
         var u = {}, max = 0;

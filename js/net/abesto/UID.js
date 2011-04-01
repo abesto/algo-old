@@ -44,6 +44,7 @@ UIDObjectStore = (function() {
     };
 
     Constructor.prototype.add = function(object) {
+        if (this.has(object)) return;
         this._uids.push(object.UID);
         this._objects[object.UID] = object;
     };
@@ -56,6 +57,10 @@ UIDObjectStore = (function() {
 
     Constructor.prototype.get = function(uid) {
         return this.has(uid) ? this._objects[uid] : null;
+    };
+
+    Constructor.prototype.getLinear = function(idx) {
+        return this.get(this._uids[idx]);
     };
 
     Constructor.prototype.remove = function(arg) {

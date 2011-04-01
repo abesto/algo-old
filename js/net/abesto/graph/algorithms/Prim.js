@@ -3,19 +3,24 @@ net.abesto.includeQueue.enqueue('net.abesto.graph.algorithms', ['ConnectedSubgra
 Namespace('net.abesto.graph.algorithms', {
 Prim: (function() {
 
-    var Constructor = function(node)
+    var Prim = function(node)
     {
         var v = net.abesto.graph.algorithms.ConnectedSubgraph.find(node),
             vn = new UIDObjectStore(), en = new UIDObjectStore(), e = new UIDObjectStore(),
             emit = net.abesto.SAS.emitFunction(this);
 
-        v.each(function(n){
-            n.setLabel('V');
-            e = UIDObjectStore.union(e, n.edges());
-        });
-        vn.add(node); node.setLabel('P');
-
         this.UID = UID();
+
+        this.init = function() {
+            emit('set_status_headers', {headers: ['V', 'E', 'V<sub>new</sub>', 'E<sub>new</sub>']});
+
+            v.each(function(n){
+                n.setLabel('V');
+                e = UIDObjectStore.union(e, n.edges());
+            });
+            vn.add(node); node.setLabel('P');
+        };
+
         this.step = function() {
             if (v.length() < vn.length()) return;
             var minimal = null;
@@ -40,10 +45,12 @@ Prim: (function() {
             newNode.setLabel('P');
             vn.add(newNode);
 
+            emit('set_status_data', {columns:[v,e,vn,en]});
+
             return (v.length() - vn.length());
         };
     };
 
-    return Constructor;
+    return Prim;
 })()
 });

@@ -25,19 +25,19 @@ body {
     color: #fff;
 }
 
-#holder {
+#graph-holder {
     width: 95%;
     display: block;
     margin: auto;
     border: 1px solid #555;
 }
 
-#holder div.dialog {
+#graph-holder div.dialog {
     width: 80%;
     margin: auto;
 }
 
-#holder div.dialog code, #holder div.dialog textarea {
+#graph-holder div.dialog code, #graph-holder div.dialog textarea {
     display: block;
     width: 60%;
     margin: auto;
@@ -47,11 +47,11 @@ body {
     padding: 8px;
 }
 
-#holder div.dialog textarea {
+#graph-holder div.dialog textarea {
     height: 300px
 }
 
-#holder div.dialog input {
+#graph-holder div.dialog input {
     margin-top: 15px;
     height: 50px;
 }
