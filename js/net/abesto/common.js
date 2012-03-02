@@ -69,7 +69,7 @@ Namespace('net.abesto', {
                 var identifiers = data[prefix];
                 count += identifiers.length;
                 identifiers.map(function(id) {
-                    Namespace.include(id, function() {
+                    Namespace.include(prefix + '.' + id, function() {
                         if (--count == 0) {
                             callback();
                         }
