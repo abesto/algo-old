@@ -20,8 +20,6 @@
  * limitations under the License.
  */
 
-net.abesto.includeQueue.require({'3rd-party.raphael': ['raphael-min']},function(){
-
 Namespace('net.abesto.graph', {
 
 GraphUI: (function()
@@ -158,5 +156,4 @@ GraphUI: (function()
     return Constructor;
 })()
 
-});
 });

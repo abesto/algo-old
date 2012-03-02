@@ -16,8 +16,10 @@
         $(function() {
             net.abesto.includeQueue.require({
                 '3rd-party': ['jquery.json'],
+                '3rd-party.raphael': ['raphael-min', 'plugins.connection'],
                 'net.abesto': ['UID', 'Slots'],
                 'net.abesto.graph': ['Graph', 'GraphUI', 'StatusUI'],
+                'net.abesto.algorithms': ['BreadthFirst', 'ConnectedSubgraph', 'Dijkstra', 'Prim'],
                 'net.abesto.graph.tools': [
                     'CreateNode', 'MoveNode', 'DeleteNode',
                     'CreateEdge', 'DeleteEdge',

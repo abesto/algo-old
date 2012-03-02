@@ -20,7 +20,6 @@
  * limitations under the License.
  */
 
-net.abesto.includeQueue.require({'net.abesto.graph.algorithms':['Dijkstra']}, function(){
 Namespace.use('net.abesto.graph.algorithms.Dijkstra');
 
 Namespace('net.abesto.graph.tools', {
@@ -70,5 +69,4 @@ DijkstraTool: {
     }
 }
 
-});
 });
