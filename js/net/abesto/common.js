@@ -63,41 +63,19 @@ if (!Array.prototype.indexOf)
 
 Namespace('net.abesto', {
     includeQueue: {
-        queue: [],
-        after: {},
-
-        includeAfter: function(what, after) {
-            if (Namespace.exist(after)) {
-                net.abesto.includeQueue.enqueue(undefined, [net.abesto.includeQueue.after[name][i]]);
-                return;
-            }
-
-            if (!net.abesto.includeQueue.after[after])
-                net.abesto.includeQueue.after[after] = [];
-            net.abesto.includeQueue.after[after].push(what);
-        },
-
-        enqueue: function(prefix, identifiers) {
-            var queue = net.abesto.includeQueue.queue;
-
-            identifiers.map(function(id){
-                var name = (prefix ? prefix + '.' + id : id).replace(/\.\.+/g, '.');
-
-                if (!net.abesto.includeQueue.after[name])
-                    net.abesto.includeQueue.after[name] = [];
-
-                queue.push(name);
-                Namespace.include(name, function() {
-                    var after = net.abesto.includeQueue.after[name];
-                    queue.splice(queue.indexOf(name), 1);
-                    for (i in net.abesto.includeQueue.after[name]) {
-                        net.abesto.includeQueue.enqueue(undefined, [net.abesto.includeQueue.after[name][i]]);
-                    }
-                    if (queue.length == 0) {
-                        net.abesto.includeQueue.callback();
-                    }
+        require: function(data, callback) {
+            var count = 0;
+            for (var prefix in data) {
+                var identifiers = data[prefix];
+                count += identifiers.length;
+                identifiers.map(function(id) {
+                    Namespace.include(id, function() {
+                        if (--count == 0) {
+                            callback();
+                        }
+                    });
                 });
-            });
+            }
         }
     },
     

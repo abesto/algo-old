@@ -1,4 +1,4 @@
-net.abesto.includeQueue.enqueue('net.abesto.graph.algorithms', ['ConnectedSubgraph']);
+net.abesto.includeQueue.require({'net.abesto.graph.algorithms': ['ConnectedSubgraph']}, function(){
 
 Namespace('net.abesto.graph.algorithms', {
 Prim: (function() {
@@ -53,4 +53,5 @@ Prim: (function() {
 
     return Prim;
 })()
+});
 });

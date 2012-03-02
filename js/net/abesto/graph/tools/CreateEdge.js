@@ -20,8 +20,7 @@
  * limitations under the License.
  */
 
-net.abesto.includeQueue.includeAfter('3rd-party.raphael.plugins.connection', '3rd-party.raphael.raphael-min');
-
+net.abesto.includeQueue.require({'3rd-party.raphael': ['raphael-min', 'plugins.connection']}, function() {
 Namespace('net.abesto.graph.tools', {
 
 CreateEdgeTool: {
@@ -67,4 +66,5 @@ CreateEdgeTool: {
     }
 }
 
+});
 });

@@ -20,7 +20,7 @@
  * limitations under the License.
  */
 
-net.abesto.includeQueue.enqueue('net.abesto.graph.algorithms', ['ConnectedSubgraph']);
+net.abesto.includeQueue.require({'net.abesto.graph.algorithms': ['ConnectedSubgraph']}, function(){
 
 Namespace('net.abesto.graph.algorithms', {
 
@@ -73,4 +73,5 @@ Dijkstra: function(node)
     };
 }
 
+});
 });

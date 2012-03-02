@@ -14,17 +14,17 @@
         Namespace.include('3rd-party.jquery');
         var g, ui, s;
         $(function() {
-            net.abesto.includeQueue.enqueue('3rd-party', ['jquery.json']);
-            net.abesto.includeQueue.enqueue('net.abesto', ['UID', 'Slots']);
-            net.abesto.includeQueue.enqueue('net.abesto.graph', ['Graph', 'GraphUI', 'StatusUI']);
-            net.abesto.includeQueue.enqueue('net.abesto.graph.tools',
-            [
-                'CreateNode', 'MoveNode', 'DeleteNode',
-                'CreateEdge', 'DeleteEdge',
-                'BreadthFirst', 'Dijkstra', 'Prim',
-                'Save', 'Load'
-            ]);
-            net.abesto.includeQueue.callback = function(){
+            net.abesto.includeQueue.require({
+                '3rd-party': ['jquery.json'],
+                'net.abesto': ['UID', 'Slots'],
+                'net.abesto.graph': ['Graph', 'GraphUI', 'StatusUI'],
+                'net.abesto.graph.tools': [
+                    'CreateNode', 'MoveNode', 'DeleteNode',
+                    'CreateEdge', 'DeleteEdge',
+                    'BreadthFirst', 'Dijkstra', 'Prim',
+                    'Save', 'Load'
+                ]
+            }, function(){
                 Namespace.use('net.abesto.graph.*');
                 Namespace.use('net.abesto.graph.tools.*');
 
@@ -47,7 +47,7 @@
                 ui.addTool(PrimTool);
                 ui.addTool(SaveTool);
                 ui.addTool(LoadTool);
-            };
+            });
         });
 
     </script>
