@@ -20,7 +20,7 @@
  * limitations under the License.
  */
 
-Namespace.include('net.abesto.graph.algorithms.BreadthFirst');
+Namespace.use('net.abesto.graph.algorithms.BreadthFirst');
 
 Namespace('net.abesto.graph.tools', {
 
@@ -34,17 +34,17 @@ BreadthFirstTool: {
             nodeClick: function(event) {
                     var b = new net.abesto.graph.algorithms.BreadthFirst(event.currentTarget.model);
 
-                    if (BreadthFirstTool.timer != null) {
-                        clearTimeout(BreadthFirstTool.timer);
-                        BreadthFirstTool.timer = null;
+                    if (this.timer != null) {
+                        clearTimeout(this.timer);
+                        this.timer = null;
                     }
 
                     this._graph.nodes().each(function(n) { n.setLabel(''); });
                     (function() {
                         if (b.step().length > 0) {
-                            BreadthFirstTool.timer = setTimeout(arguments.callee, 800);
+                            this.timer = setTimeout(arguments.callee, 800);
                         } else {
-                            BreadthFirstTool.timer = null;
+                            this.timer = null;
                         }
                     })();
             }

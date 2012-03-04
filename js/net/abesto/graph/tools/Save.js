@@ -20,7 +20,7 @@
  * limitations under the License.
  */
 
-Namespace.include('net.abesto.graph.Serializer');
+Namespace.use('net.abesto.graph.Serializer');
 
 Namespace('net.abesto.graph.tools', {
 

@@ -62,27 +62,6 @@ if (!Array.prototype.indexOf)
 })();
 
 Namespace('net.abesto', {
-    includeQueue: {
-        require: function(data, callback) {
-            var count = 0;
-            for (var prefix in data) {
-                var identifiers = data[prefix];
-                count += identifiers.length;
-            }
-
-            for (var prefix in data) {
-                var identifiers = data[prefix];
-                identifiers.map(function(id) {
-                    Namespace.include(prefix + '.' + id, function() {
-                        if (--count == 0) {
-                            callback();
-                        }
-                    });
-                });
-            }
-        }
-    },
-    
     GET: (function() {
         var i, params = window.location.search.substr(1).split('&').map(
                 function(string) {

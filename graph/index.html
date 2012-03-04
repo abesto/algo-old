@@ -7,63 +7,77 @@
 
     <link rel="stylesheet" type="text/css" href="graph.css" />
 
+    <script type="text/javascript" src="../js/3rd-party/jquery.js"></script>
+    <script type="text/javascript" src="../js/3rd-party/jquery/json.js"></script>
+    <script type="text/javascript" src="../js/3rd-party/jquery/scrollTo.js"></script>
     <script type="text/javascript" src="../js/3rd-party/Namespace.js"></script>
+    <script type="text/javascript" src="../js/3rd-party/raphael/raphael-min.js"></script>
+    <script type="text/javascript" src="../js/3rd-party/raphael/plugins/connection.js"></script>
+    <script type="text/javascript" src="../js/app.js"></script>
     <script type="text/javascript" src="../js/net/abesto/common.js"></script>
-
+    <script type="text/javascript" src="../js/net/abesto/ConsoleUI.js"></script>
+    <script type="text/javascript" src="../js/net/abesto/counting-sort/CountingSort.js"></script>
+    <script type="text/javascript" src="../js/net/abesto/counting-sort/DetailsUI.js"></script>
+    <script type="text/javascript" src="../js/net/abesto/counting-sort/History.js"></script>
+    <script type="text/javascript" src="../js/net/abesto/counting-sort/HistoryUI.js"></script>
+    <script type="text/javascript" src="../js/net/abesto/counting-sort/InputUI.js"></script>
+    <script type="text/javascript" src="../js/net/abesto/counting-sort/StateUI.js"></script>
+    <script type="text/javascript" src="../js/net/abesto/graph/algorithms/BreadthFirst.js"></script>
+    <script type="text/javascript" src="../js/net/abesto/graph/algorithms/ConnectedSubgraph.js"></script>
+    <script type="text/javascript" src="../js/net/abesto/graph/algorithms/Dijkstra.js"></script>
+    <script type="text/javascript" src="../js/net/abesto/graph/algorithms/Prim.js"></script>
+    <script type="text/javascript" src="../js/net/abesto/graph/Graph.js"></script>
+    <script type="text/javascript" src="../js/net/abesto/graph/GraphUI.js"></script>
+    <script type="text/javascript" src="../js/net/abesto/graph/Serializer.js"></script>
+    <script type="text/javascript" src="../js/net/abesto/graph/StatusUI.js"></script>
+    <script type="text/javascript" src="../js/net/abesto/graph/tools/BreadthFirst.js"></script>
+    <script type="text/javascript" src="../js/net/abesto/graph/tools/CreateEdge.js"></script>
+    <script type="text/javascript" src="../js/net/abesto/graph/tools/CreateNode.js"></script>
+    <script type="text/javascript" src="../js/net/abesto/graph/tools/DeleteEdge.js"></script>
+    <script type="text/javascript" src="../js/net/abesto/graph/tools/DeleteNode.js"></script>
+    <script type="text/javascript" src="../js/net/abesto/graph/tools/Dijkstra.js"></script>
+    <script type="text/javascript" src="../js/net/abesto/graph/tools/Load.js"></script>
+    <script type="text/javascript" src="../js/net/abesto/graph/tools/MoveNode.js"></script>
+    <script type="text/javascript" src="../js/net/abesto/graph/tools/Prim.js"></script>
+    <script type="text/javascript" src="../js/net/abesto/graph/tools/Save.js"></script>
+    <script type="text/javascript" src="../js/net/abesto/Slots.js"></script>
+    <script type="text/javascript" src="../js/net/abesto/Translation.js"></script>
+    <script type="text/javascript" src="../js/net/abesto/UID.js"></script>
     <script type="text/javascript">
-        Namespace.include('3rd-party.jquery');
-        var g, ui, s;
-        $(function() {
-            net.abesto.includeQueue.require({
-                '3rd-party': ['jquery.json'],
-                '3rd-party.raphael': ['raphael-min', 'plugins.connection'],
-                'net.abesto': ['UID', 'Slots'],
-                'net.abesto.graph': ['Graph', 'GraphUI', 'StatusUI'],
-                'net.abesto.graph.algorithms': ['BreadthFirst', 'ConnectedSubgraph', 'Dijkstra', 'Prim'],
-                'net.abesto.graph.tools': [
-                    'CreateNode', 'MoveNode', 'DeleteNode',
-                    'CreateEdge', 'DeleteEdge',
-                    'BreadthFirst', 'Dijkstra', 'Prim',
-                    'Save', 'Load'
-                ]
-            }, function(){
-                Namespace.use('net.abesto.graph.*');
-                Namespace.use('net.abesto.graph.tools.*');
+    $(function(){
+        Namespace.use('net.abesto.graph');
+        g = new graph.Graph();
 
-                g = new Graph();
+        var     holder = $('#graph-holder'), width = holder.width(),
+        height = $(window).height() - holder.offset().top - 30;
 
-                var     holder = $('#graph-holder'), width = holder.width(),
-                        height = $(window).height() - holder.offset().top - 30;
-                
-                s = new StatusUI($('#status-holder'));
-                PrimTool.statusUI = s;
+        s = new graph.StatusUI($('#status-holder'));
+        graph.tools.PrimTool.statusUI = s;
 
-                ui = new GraphUI('graph-holder', width, height, g);
-                ui.addTool(CreateNodeTool);
-                ui.addTool(MoveNodeTool);
-                ui.addTool(DeleteNodeTool);
-                ui.addTool(CreateEdgeTool);
-                ui.addTool(DeleteEdgeTool);
-                ui.addTool(BreadthFirstTool);
-                ui.addTool(DijkstraTool);
-                ui.addTool(PrimTool);
-                ui.addTool(SaveTool);
-                ui.addTool(LoadTool);
-            });
-        });
-
+        ui = new graph.GraphUI('graph-holder', width, height, g);
+        ui.addTool(graph.tools.CreateNodeTool);
+        ui.addTool(graph.tools.MoveNodeTool);
+        ui.addTool(graph.tools.DeleteNodeTool);
+        ui.addTool(graph.tools.CreateEdgeTool);
+        ui.addTool(graph.tools.DeleteEdgeTool);
+        ui.addTool(graph.tools.BreadthFirstTool);
+        ui.addTool(graph.tools.DijkstraTool);
+        ui.addTool(graph.tools.PrimTool);
+        ui.addTool(graph.tools.SaveTool);
+        ui.addTool(graph.tools.LoadTool);
+    });
     </script>
 </head>
 <body>
-<h2>Gráfalgoritmusok</h2>
-<div id="container">
-    <div id="graph-holder" style="width: 75%; float: left"></div>
-    <div id="status-holder" style="width: 20%; float: right"><h3>Az algoritmus állapota</h3></div>
-</div>
-<div class="copyright" style="clear: both">Copyright 2011 Nagy Zoltán (<a href="/LICENSE">MIT License)</a>
-    | <a href="http://jquery.org">JQuery</a> 1.5 (<a href="/JQUERY-LICENSE.txt">MIT License</a>)
-    | <a href="https://github.com/smith/namespacedotjs">Namespace.js</a> (<a href="/NAMESPACE-LICENSE.txt">MIT License</a>)
-    | <a href="http://raphaeljs.com/">Raphaël.js</a> (<a href="http://raphaeljs.com/license.html">MIT License</a>)
-</div>
+    <h2>Gráfalgoritmusok</h2>
+    <div id="container">
+        <div id="graph-holder" style="width: 75%; float: left"></div>
+        <div id="status-holder" style="width: 20%; float: right"><h3>Az algoritmus állapota</h3></div>
+    </div>
+    <div class="copyright" style="clear: both">Copyright 2011 Nagy Zoltán (<a href="/LICENSE">MIT License)</a>
+        | <a href="http://jquery.org">JQuery</a> 1.5 (<a href="/JQUERY-LICENSE.txt">MIT License</a>)
+        | <a href="https://github.com/smith/namespacedotjs">Namespace.js</a> (<a href="/NAMESPACE-LICENSE.txt">MIT License</a>)
+        | <a href="http://raphaeljs.com/">Raphaël.js</a> (<a href="http://raphaeljs.com/license.html">MIT License</a>)
+    </div>
 </body>
 </html>

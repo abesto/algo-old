@@ -20,6 +20,9 @@
  * limitations under the License.
  */
 
+Namespace.use('net.abesto.graph.GraphUI');
+Namespace.use('net.abesto.graph.Node');
+
 Namespace('net.abesto.graph.tools', {
 
 CreateNodeTool: {

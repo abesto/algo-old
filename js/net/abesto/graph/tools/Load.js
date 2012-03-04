@@ -48,7 +48,7 @@ LoadTool: {
 
                         for (i in input.nodes) {
                             if (!input.nodes.hasOwnProperty(i)) return;
-                            SIDtoUID[input.nodes[i].SID] = CreateNodeTool.hooks.createNode.canvasClick.call(that, {
+                            SIDtoUID[input.nodes[i].SID] = net.abesto.graph.tools.CreateNodeTool.hooks.createNode.canvasClick.call(that, {
                                 pageX: $(that._r.canvas).offset().left + input.nodes[i].x,
                                 pageY: $(that._r.canvas).offset().top + input.nodes[i].y
                             });
@@ -59,13 +59,13 @@ LoadTool: {
                             var n1 = that._graph.nodes().get(SIDtoUID[input.edges[i].n1]),
                                 n2 = that._graph.nodes().get(SIDtoUID[input.edges[i].n2]);
 
-                            CreateEdgeTool.hooks.createEdge.dragger.call(that, n1.ui);
-                            CreateEdgeTool.hooks.createEdge.nodeMouseup.call(
+                            net.abesto.graph.tools.CreateEdgeTool.hooks.createEdge.dragger.call(that, n1.ui);
+                            net.abesto.graph.tools.CreateEdgeTool.hooks.createEdge.nodeMouseup.call(
                                     that,
                                     {currentTarget: n2.ui.node}
                             );
-                            CreateEdgeTool.hooks.createEdge.up.call(that, n1.ui);
-                            CreateEdgeTool.hooks.createEdge.up.call(that, n2.ui);
+                            net.abesto.graph.tools.CreateEdgeTool.hooks.createEdge.up.call(that, n1.ui);
+                            net.abesto.graph.tools.CreateEdgeTool.hooks.createEdge.up.call(that, n2.ui);
                         }
                     }));
 

@@ -20,6 +20,8 @@
  * limitations under the License.
  */
 
+Namespace.use('net.abesto.graph')
+
 Namespace('net.abesto.graph', {
 
 Node: (function() {
@@ -135,7 +137,7 @@ Graph: (function() {
     };
 
     Constructor.prototype.connect = function(n1, n2) {
-        var e = new Edge(n1, n2);
+        var e = new net.abesto.graph.Edge(n1, n2);
         this.edges().add(e);
         net.abesto.SAS.addSlot(this._reEmit, e.UID);
         n1.addEdge(e); n2.addEdge(e);

@@ -33,9 +33,9 @@ DijkstraTool: {
         dijkstra: {
             nodeClick: function(event) {
                     var d = new Dijkstra(event.currentTarget.model);
-                    if (DijkstraTool.timer != null) {
-                        clearTimeout(DijkstraTool.timer);
-                        DijkstraTool.timer = null;
+                    if (this.timer != null) {
+                        clearTimeout(this.timer);
+                        this.timer = null;
                     }
 
                     this.resetEdges();
@@ -59,9 +59,9 @@ DijkstraTool: {
                     (function() {
                         setTimeout(function() {
                         if (d.step().length > 0) {
-                            DijkstraTool.timer = setTimeout(arguments.callee, 1300);
+                            this.timer = setTimeout(arguments.callee, 1300);
                         } else {
-                            DijkstraTool.timer = null;
+                            this.timer = null;
                         }
                     }, 1500);})();
             }
